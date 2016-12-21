@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script>
+        //array of the images
+        var arrImg =
+            [
+                "../images/4.jpg",
+                "../images/0.jpg",
+                "../images/1.jpg",
+                "../images/2.jpg",
+                "../images/3.jpg"
+            ]
+        //array of the thumbnails
+        var arrThumb =
+            [
+                "../thumbs/tn_4.jpg",
+                "../thumbs/tn_0.jpg",
+                "../thumbs/tn_1.jpg",
+                "../thumbs/tn_2.jpg",
+                "../thumbs/tn_3.jpg"
+            ]
+
+        var iMageIndex = 0;
+        var tHumbIndex = 0;
+
+        //on document load - fill with he first images in the arrays
+        window.onload = rollRight;
+        function rollRight() {
+            //one step right for the image index
+            iMageIndex += 1;
+            iMageIndex %= arrImg.length;
+            //one step right for the thumbnail index
+            tHumbIndex += 1;
+            //stay in the array index limitation by modulo
+            tHumbIndex %= arrThumb.length;
+            rollGallery();
+        }
+
+        //Rolling to left
+        function rollLeft() {
+            //one step left for the image index
+            iMageIndex -= 1;
+            //if we get negative index - go to the end of the array
+            if (iMageIndex < 0) {
+                //stay in the array index limitation
+                iMageIndex += arrImg.length;
+            }
+            //else - keep rolling left
+            else {
+                //stay in the array index limitation by modulo
+                iMageIndex %= arrImg.length;
+            }
+            //one step left for the thumbnail index
+            tHumbIndex -= 1;
+            //if we get negative index - go to the end of the array
+            if (tHumbIndex < 0) {
+                //stay in the array index limitation
+                tHumbIndex += arrThumb.length;
+            }
+            //else - keep rolling left
+            else {
+                //stay in the array index limitation by modulo
+                tHumbIndex %= arrThumb.length;
+            }
+            //load images
+            rollGallery();
+        }
+
+        //load the current index of image and thumbnail
+        function rollGallery() {
+            document.getElementById("img").src = arrImg[iMageIndex];
+            document.getElementById("thumb").src = arrThumb[tHumbIndex];
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td align="center">
+                <img id="img" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <button onclick="rollLeft()">&lt--Left</button>
+                <img id="thumb" />
+                <button onclick="rollRight()">Right--&gt</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
