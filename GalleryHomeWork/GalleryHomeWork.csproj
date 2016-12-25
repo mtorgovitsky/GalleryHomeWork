@@ -43,6 +43,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="HTML\FiveThumbs.html" />
     <Content Include="HTML\Gallery.html" />
     <Content Include="images\0.jpg" />
     <Content Include="images\1.jpg" />

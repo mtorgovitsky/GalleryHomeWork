@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script>
+        //array of the images
+        var arrImg =
+            [
+                "../images/0.jpg",
+                "../images/1.jpg",
+                "../images/2.jpg",
+                "../images/3.jpg",
+                "../images/4.jpg"
+        ]
+
+        var iMageIndex = 0;
+
+        //Rolling to right
+        function rollRight() {
+            //one step right for the image index
+            iMageIndex += 1;
+            //display current changes
+            rollGallery(iMageIndex);
+        }
+
+        //Rolling to left
+        function rollLeft() {
+            //one step left for the image index
+            iMageIndex -= 1;
+            //if we get negative index - go to the end of the array
+            if (iMageIndex < 0) {
+                //stay in the array index limitation
+                iMageIndex += arrImg.length;
+            }
+            //display current changes
+            rollGallery(iMageIndex);
+        }
+
+        //load the current index of image and change thumbnails border
+        function rollGallery(currentIndex) {
+            //stay in the array index limitation by modulo
+            currentIndex %= arrImg.length;
+            //display current image by current index
+            document.getElementById("img").src = arrImg[currentIndex];
+            //current thumbnail id variable
+            var currID = "thumb" + currentIndex;
+            document.getElementById(currID).style.border = "2px solid blue";
+
+            //=============change the border of all other thumbnails to zero=============
+            for (var i = 0; i < arrImg.length; i++) {
+                var noBorderID = "thumb" + i;
+                //if the thumbnail id is not cyrrent - change it's border to zero
+                if (noBorderID != currID) {
+                    document.getElementById(noBorderID).style.border = "0px";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <table id="imgTable" style="margin: 0px auto;">
+        <tr>
+            <td align="center">
+                <img id="img" src="../images/0.jpg" />
+            </td>
+        </tr>
+    </table>
+    <table id="thumbTable" style="margin: 0px auto;">
+        <tr>
+            <td align="center">
+                <button onclick="rollLeft()">&lt--Left</button>
+            <td align="center">
+                <img id="thumb0" src="../thumbs/tn_0.jpg" style="border: 2px solid blue" />
+            <td align="center">
+                <img id="thumb1" src="../thumbs/tn_1.jpg" />
+            <td align="center">
+                <img id="thumb2" src="../thumbs/tn_2.jpg" />
+            <td align="center">
+                <img id="thumb3" src="../thumbs/tn_3.jpg" />
+            <td align="center">
+                <img id="thumb4" src="../thumbs/tn_4.jpg" />
+            <td align="center">
+                <button onclick="rollRight()">Right--&gt</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
